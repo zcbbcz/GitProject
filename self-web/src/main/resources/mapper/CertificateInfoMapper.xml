@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zcblk.dao.CertificateInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zcblk.model.CertificateInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="resume_info_id" property="resumeInfoId" jdbcType="INTEGER" />
+    <result column="acquisition_time" property="acquisitionTime" jdbcType="TIMESTAMP" />
+    <result column="certificate_name" property="certificateName" jdbcType="VARCHAR" />
+    <result column="certificate_leve" property="certificateLeve" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, resume_info_id, acquisition_time, certificate_name, certificate_leve
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from certificate_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from certificate_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zcblk.model.CertificateInfo" >
+    insert into certificate_info (id, resume_info_id, acquisition_time, 
+      certificate_name, certificate_leve)
+    values (#{id,jdbcType=INTEGER}, #{resumeInfoId,jdbcType=INTEGER}, #{acquisitionTime,jdbcType=TIMESTAMP}, 
+      #{certificateName,jdbcType=VARCHAR}, #{certificateLeve,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zcblk.model.CertificateInfo" >
+    insert into certificate_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="resumeInfoId != null" >
+        resume_info_id,
+      </if>
+      <if test="acquisitionTime != null" >
+        acquisition_time,
+      </if>
+      <if test="certificateName != null" >
+        certificate_name,
+      </if>
+      <if test="certificateLeve != null" >
+        certificate_leve,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="resumeInfoId != null" >
+        #{resumeInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionTime != null" >
+        #{acquisitionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="certificateName != null" >
+        #{certificateName,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateLeve != null" >
+        #{certificateLeve,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zcblk.model.CertificateInfo" >
+    update certificate_info
+    <set >
+      <if test="resumeInfoId != null" >
+        resume_info_id = #{resumeInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="acquisitionTime != null" >
+        acquisition_time = #{acquisitionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="certificateName != null" >
+        certificate_name = #{certificateName,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateLeve != null" >
+        certificate_leve = #{certificateLeve,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zcblk.model.CertificateInfo" >
+    update certificate_info
+    set resume_info_id = #{resumeInfoId,jdbcType=INTEGER},
+      acquisition_time = #{acquisitionTime,jdbcType=TIMESTAMP},
+      certificate_name = #{certificateName,jdbcType=VARCHAR},
+      certificate_leve = #{certificateLeve,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
